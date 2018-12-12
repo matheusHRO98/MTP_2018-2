@@ -1,48 +1,41 @@
 //matheus henrique rodrigues de oliveira
 // 11811EBI022
+
 #include <stdio.h>
-int sm(int len, int *v)
+#include <stdlib.h>
+#include <math.h>
 
+typedef struct
 {
+	float x;
+	float y;
+}ponto;
 
-   if(len>0)
-
-        return *v+sm(len-1, v+1);
-
-    else
-
-        return 0.0;
-
+ponto * gera_pontos(int N) {
+    ponto * p = (ponto *) calloc(N,sizeof(ponto));
+    int i;
+    for(i = 0; i < N; i++){
+        p[i].x = cos(i*2.0*M_PI/(N-1));
+		p[i].y = sin(i*2.0*M_PI/(N-1));
+    }
+    return p;
 }
 
-float med(int x, int y)
-
-{
-
-    return (float)x/(float)y;
-
+void mostra_pontos(ponto * p_ini, ponto * p_fim) {
+    if(p_ini < p_fim) {
+        printf("(%.3f, %.3f)\n", p_ini->x, p_ini->y);
+        mostra_pontos(p_ini+1, p_fim);
+    }
 }
 
-int main ()
-
-{
-
-	int vet[]={0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
-
-	int tam=0, i=0;
-
-	printf("Quantidade a ser somada:\n");
-
-	scanf("%d", &tam);
-
-	printf("\nValores: \n");
-
-	for (i=0; i<tam; i++)
- 
-		scanf("%d", &vet[i]);
-
-	printf("\nmedia = %f", med(sm(tam, vet), tam));
-
-	return 0;
-
+int main() {
+    unsigned int N;
+    ponto *p;
+    printf("Quantos pontos?: ");
+    scanf("%u", &N); 
+	getchar();
+    p = gera_pontos(N);
+    mostra_pontos(p, p+N);
+    free(p);
+    return 0;
 }
