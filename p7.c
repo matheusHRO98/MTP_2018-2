@@ -1,3 +1,5 @@
+//matheus henrique rodrigues de oliveira
+//11811EBI022
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
